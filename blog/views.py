@@ -7,6 +7,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from .models import Post
 from .forms import CommentForms
+from django.views.decorators.csrf import csrf_protect
+from django.utils.decorators import method_decorator
 class StartingPageView(ListView):
     template_name = "blog/index.html"
     model = Post
@@ -24,8 +26,10 @@ class AllPostsView(ListView):
     ordering = ["-Date"]
     context_object_name = "all_posts"
 
-class SinglePostView(View):
 
+
+class SinglePostView(View):
+    
     def is_stored_post(self,request,post_id):
         stored_posts = request.session.get("stored_posts")
         if stored_posts is not None:
@@ -64,9 +68,10 @@ class SinglePostView(View):
             "saved":self.is_stored_post(request,post.id)
         }
         return render(request,"blog/post-detail.html",context)
-    
-class ReadLaterView(View):
 
+csrf_protected_method = method_decorator(csrf_protect)  
+class ReadLaterView(View):
+    
     def get(self,request):
         stored_posts = request.session.get("stored_posts")
         context = {}
@@ -79,8 +84,9 @@ class ReadLaterView(View):
             context["has_posts"] = True
         
         return render(request,"blog/stored-posts.html",context)
-
+    
     def post(self,request):
+        
         stored_posts = request.session.get("stored_posts")
 
         if stored_posts is None:
