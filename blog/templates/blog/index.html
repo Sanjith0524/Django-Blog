@@ -21,11 +21,13 @@ My Blog
 
 <section id='latest-posts'>
     <h2>Latest blogs</h2>
+    <div class="containers">
     {% for post in posts %}
     <ul>
         {% include 'blog/includes/post.html'%}
     </ul>
     {% endfor %}
+    </div>
 </section>
 
 <section id='about'>
