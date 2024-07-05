@@ -1,0 +1,54 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="{% static 'app.css' %}">
+    <link rel="stylesheet" href="{% static 'login/register.css' %}">
+</head> 
+<body>
+    <header id='main-navigation'>
+        <h1><a onclick="alert('Register to continue')" style="cursor: pointer;">HOME</a></h1>
+        <nav>
+            <a onclick="alert('Register to continue')" style="cursor: pointer;">All posts</a>
+            <a onclick="alert('Register to continue')" style="cursor: pointer;">Stored posts</a>
+        </nav>
+    </header>
+    <h2 class="register">Register</h2>
+<form method="post" class="mt-4">
+    {% csrf_token %}
+    <div class="form-group">
+        {{ form.username.label_tag }} {{ form.username }}
+        <div class="text-danger">{{ form.username.errors }}</div>
+    </div>
+    <div class="form-group">
+        {{ form.email.label_tag }} {{ form.email }}
+        <div class="text-danger">{{ form.email.errors }}</div>
+    </div>
+    <div class="form-group">
+        {{ form.password.label_tag }} {{ form.password }}
+        <div class="text-danger">{{ form.password.errors }}</div>
+    </div>
+    <div class="form-group">
+    <button type="submit" class="btn btn-primary">Register</button>
+    
+    </div>
+    <p class="register-msg">Already an User <a href="{% url 'login'%}" class="click-btn">Click here</a> to login</p>
+</form>
+
+
+    <section id='about'>
+    <h2>About Us</h2>
+    <p>I love programming</p>
+    <p>My goal is to keep on growing as a developer - and if I could help you 
+        do the same I'd be very happy
+    </p>
+
+
+  
+</body>
+</html>
